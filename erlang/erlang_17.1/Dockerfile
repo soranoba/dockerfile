@@ -1,6 +1,6 @@
 # erlang R17.1 @Ubuntu 14.04 (64bit)
 #
-# $ docker build -t soranoba/erlang17 .
+# $ docker build -t soranoba/erlang:17.01 .
 
 FROM ubuntu:14.04
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>

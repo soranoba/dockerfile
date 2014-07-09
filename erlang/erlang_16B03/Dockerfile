@@ -1,6 +1,6 @@
-# erlang R16B03rev2 @Ubuntu 12.10 (64bit)
+# erlang R16B03 @Ubuntu 12.10 (64bit)
 #
-# $ docker build -t soranoba/erlang16b03 .
+# $ docker build -t soranoba/erlang:16.b03 .
 
 FROM ubuntu:12.10
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
@@ -14,12 +14,18 @@ RUN apt-get install -y emacs
 # install erlang
 RUN apt-get install -y wget
 
-RUN wget http://packages.erlang-solutions.com/site/esl/esl-erlang/FLAVOUR_1_general/esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb
+RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+RUN dpkg -i erlang-solutions_1.0_all.deb
+RUN rm erlang-solutions_1.0_all.deb
 
-RUN apt-get install -y libwxbase2.8-0 libwxgtk2.8-0
-RUN dpkg -i esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb
-RUN rm esl-erlang_16.b.3-2~ubuntu~precise_amd64.deb
+RUN echo "deb http://packages.erlang-solutions.com/ubuntu trusty contrib" >> /etc/apt/source.list
+RUN wget http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+RUN apt-key add erlang_solutions.asc
+RUN rm erlang_solutions.asc
 
-RUN apt-get install -y erlang-mode
+RUN apt-get update
+RUN apt-get install -y erlang=1:16.b.3
+
+# install rebar
 
 CMD ["echo", "This container is a development environment for erlang R16B03.", "\n\n$ docker run -i -t soranoba/erlang /bin/bash"]

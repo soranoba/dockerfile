@@ -29,9 +29,7 @@ RUN apt-get install -y erlang=1:16.b.3
 # install rebar
 RUN apt-get install -y git
 RUN git clone https://github.com/rebar/rebar.git /usr/local/bin/rebar
-RUN cd /usr/local/bin/rebar
-RUN ./bootstrap
-RUN cd
+RUN cd /usr/local/bin/rebar; ./bootstrap; cd;
 RUN ln -s /usr/local/bin/rebar/rebar /usr/bin/rebar
 
 CMD ["echo", "This container is a development environment for erlang R16B03.", "\n\n$ docker run -i -t soranoba/erlang /bin/bash"]

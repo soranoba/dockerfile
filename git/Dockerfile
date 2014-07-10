@@ -1,0 +1,16 @@
+# erlang R16B03 @Ubuntu 12.10 (64bit)
+#
+# $ docker build -t soranoba/erlang:16.b03 .
+
+FROM ubuntu:12.10
+MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
+
+# default update
+RUN apt-get update
+
+# install git
+RUN apt-get install -y git
+
+# copy ssh key
+ADD .ssh /root/.ssh
+

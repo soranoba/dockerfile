@@ -1,11 +1,12 @@
 dockerfile
 ==========
 
-dockerで作った作業環境
+## About
+dockerで作った作業環境。
 
 ## How to use
 #### Requires
-- ![docker](http://docker.io)
+- [docker](http://docker.io)
 - make
 
 #### Build
@@ -14,22 +15,25 @@ dockerで作った作業環境
 $ make
 ```
 
+dockerはデフォルトでsudo実行しないといけない為、うまくいかない場合はsudo makeを試してください。
+
 #### Run
 
 ```
 $ make run
 ```
 
-## 
+## Module
 ### erlang
-erlang + hipe + emacs + erlang-mode + git + rebar
+erlang + hipe + emacs + erlang-mode + [git](#git) + rebar
 
 - erlang 17.01
--- Ubuntu 14.04
+ - Ubuntu 14.04
 
 - erlang R16.03b
--- Ubuntu 12.10
+ - Ubuntu 12.10
 
+<a name="git">
 ### git
 git + git_completion
 

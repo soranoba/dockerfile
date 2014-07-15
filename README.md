@@ -1,12 +1,45 @@
-ldockerfile
+dockerfile
 ==========
 
-dockerで作った作業環境はここに置いていく
+## About
+dockerで作った作業環境。
 
-## erlang
-OS: Ubuntu 14.04
+## How to use
+#### Requires
+- [docker](http://docker.io)
+- make
 
-erlang R17.1 + emacs + erlang-mode
+#### Build
+
+```
+$ make
+```
+
+dockerはデフォルトでsudo実行しないといけない為、うまくいかない場合はsudo makeを試してください。
+
+#### Run
+
+```
+$ make run
+```
+
+## Module
+### erlang
+erlang + hipe + emacs + erlang-mode + [git](#git) + rebar
+
+- erlang 17.01
+ - Ubuntu 14.04
+
+- erlang R16.03b
+ - Ubuntu 12.10
+
+<a name="git">
+### git
+git + git_completion
+
+- Ubuntu 12.10
+
+Copy to guest OS from host OS's git and ssh settings. 
 
 ## Licence
 MIT Licence

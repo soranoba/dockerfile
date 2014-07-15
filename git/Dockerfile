@@ -1,6 +1,6 @@
-# erlang R16B03 @Ubuntu 12.10 (64bit)
+# git @ Ubuntu12.10
 #
-# $ docker build -t soranoba/erlang:16.b03 .
+# $ docker build -t soranoba/git .
 
 FROM ubuntu:12.10
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>

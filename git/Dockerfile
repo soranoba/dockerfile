@@ -13,4 +13,10 @@ RUN apt-get install -y git
 
 # copy ssh key
 ADD .ssh /root/.ssh
+ADD .gitconfig /.gitconfig
 
+# bash-completion
+RUN apt-get install -y bash-completion
+ADD bashrc __bashrc
+RUN cat __bashrc >> ~/.bashrc
+RUN rm __bashrc

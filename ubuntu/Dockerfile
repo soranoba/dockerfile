@@ -1,15 +1,12 @@
-# erlang R17.1 @Ubuntu 14.04 (64bit)
+# ubuntu-jp
 #
-# $ docker build -t soranoba/erlang:17.01 .
+# $ docker build -t soranoba/ubuntu-ja:14.04
 
 FROM ubuntu:14.04
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
 
 # ja
-RUN apt-get install -y aptitude
-RUN aptitude install -y language-pack-ja
-RUN dpkg-reconfigure locales
-
-ADD ja /ja
-RUN cat /ja >> ~/.bashrc
-RUN rm /ja
+RUN unlink /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Japan /etc/localtime
+RUN echo "export LANG=ja_JP.UTF-8" >> /.bashrc
+RUN locale-gen ja_JP.UTF-8

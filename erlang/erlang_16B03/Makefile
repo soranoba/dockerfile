@@ -1,11 +1,21 @@
+IMAGE_NAME = soranoba/erlang:16.b03
+
 all: build
 
 build:
-	cp ~/.gitconfig .
-	cp -r ~/.ssh .
-	docker build -t soranoba/erlang:16.b03 .
-	rm -rf .ssh
-	rm .gitconfig
+	@cp ~/.gitconfig .
+	@cp -r ~/.ssh .
+	@docker build -t $(IMAGE_NAME) .
+	@rm -rf .ssh
+	@rm .gitconfig
 
-run:
-	docker run -t -i soranoba/erlang:16.b03 /bin/bash
+start:
+	@if [ -f .docker ]; then \
+		read DOCKER < .docker; \
+		docker start $$DOCKER; \
+		docker attach $$DOCKER; \
+	else \
+		read -p "Container's name : " DOCKER; \
+		echo $$DOCKER > .docker; \
+		docker run -t -i --name $$DOCKER $(IMAGE_NAME) /bin/bash; \
+	fi

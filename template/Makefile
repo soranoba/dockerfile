@@ -1,13 +1,9 @@
-IMAGE_NAME = soranoba/git
+IMAGE_NAME = user/image:tag
 
 all: build
 
 build:
-	@cp -r ~/.ssh .
-	@cp ~/.gitconfig .
 	@docker build -t $(IMAGE_NAME) .
-	@rm .gitconfig
-	@rm -rf .ssh
 
 start:
 	@if [ -f .docker ]; then \

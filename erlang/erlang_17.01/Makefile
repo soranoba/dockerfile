@@ -1,13 +1,13 @@
-IMAGE_NAME = soranoba/git
+IMAGE_NAME = soranoba/erlang:17.01
 
 all: build
 
 build:
-	@cp -r ~/.ssh .
 	@cp ~/.gitconfig .
+	@cp -r ~/.ssh .
 	@docker build -t $(IMAGE_NAME) .
-	@rm .gitconfig
 	@rm -rf .ssh
+	@rm .gitconfig
 
 start:
 	@if [ -f .docker ]; then \

@@ -20,7 +20,7 @@ RUN apt-get install -y libwxbase2.8-0 libwxgtk2.8-0
 RUN dpkg -i esl-erlang_17.1-1~ubuntu~trusty_amd64.deb
 RUN rm esl-erlang_17.1-1~ubuntu~trusty_amd64.deb
 
-RUN apt-get install -y erlang-mode erlang-base-hipe
+RUN apt-get install -y erlang-mode
 
 # install rebar
 RUN apt-get install -y git make

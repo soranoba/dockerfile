@@ -35,7 +35,7 @@ erlang + hipe + emacs + erlang-mode + [git](#git) + rebar
 
 <a name="git">
 ### git
-[git](git/README.md)
+[git](git)
 
 ## Licence
 MIT Licence

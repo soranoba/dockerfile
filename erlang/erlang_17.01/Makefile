@@ -1,4 +1,4 @@
-IMAGE_NAME = soranoba/erlang:16.b03
+IMAGE_NAME = soranoba/erlang:17.01
 
 all: build
 

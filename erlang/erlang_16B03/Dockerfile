@@ -1,8 +1,8 @@
-# erlang R16B03 @Ubuntu 12.10 (64bit)
+# erlang R16B03 @Ubuntu 12.04
 #
 # $ docker build -t soranoba/erlang:16.b03 .
 
-FROM ubuntu:12.10
+FROM ubuntu:12.04
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
 
 # default update
@@ -35,5 +35,3 @@ RUN ln -s /usr/local/bin/rebar/rebar /usr/bin/rebar
 # git config
 ADD .ssh /root/.ssh
 ADD .gitconfig /.gitconfig
-
-CMD ["echo", "This container is a development environment for erlang R16B03.", "\n\n$ docker run -i -t soranoba/erlang /bin/bash"]

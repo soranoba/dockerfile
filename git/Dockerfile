@@ -1,8 +1,8 @@
-# git @ Ubuntu12.10
+# git @ Ubuntu12.04
 #
 # $ docker build -t soranoba/git .
 
-FROM ubuntu:12.10
+FROM ubuntu:12.04
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
 
 # default update

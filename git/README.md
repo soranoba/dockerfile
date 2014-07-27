@@ -29,4 +29,4 @@ $ cd ubuntu:12.04
 $ make
 ```
 
-[Please look here for more information.](../README.md#run)
+[Please look here for more information.](../#how-to-use)

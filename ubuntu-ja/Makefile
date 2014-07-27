@@ -1,4 +1,4 @@
-IMAGE_NAME          = soranoba/git
+IMAGE_NAME = soranoba/ubuntu-ja:14.04
 
 .PHONY: build start clean clean_all
 
@@ -7,11 +7,8 @@ all: build start
 build: .build
 
 .build: Dockerfile
-	@cp -rf ~/.ssh .ssh
-	@cp ~/.gitconfig .gitconfig
 	@docker build -t $(IMAGE_NAME) .
 	@if [ $$? = 0 ]; then touch .build; fi
-	@rm -rf .gitconfig .ssh
 
 start:
 	@if [ -f .docker ]; then \

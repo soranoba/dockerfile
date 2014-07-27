@@ -1,7 +1,10 @@
-# ubuntu-jp
+# ubuntu-ja
 #
 # $ docker build -t soranoba/ubuntu-ja:14.04
+# or
+# $ docker pull soranoba/ubuntu-ja:14.04
 
+# If you want to another version, please change this value.
 FROM ubuntu:14.04
 MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
 

@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# ex) ./compile ubuntu:12.04 ubuntu-git:12.04 .ubuntu-template 
+
+OS=$1
+NAME=$2
+SRC=$3
+
+if [ ! -d $OS ]; then
+    mkdir $OS
+fi
+
+# Makefile, Dockerfile
+echo "FROM $OS" > $OS/Dockerfile
+cat $SRC/Dockerfile >> $OS/Dockerfile
+echo "IMAGE_NAME = soranoba/$NAME" > $OS/Makefile
+cat $SRC/Makefile >> $OS/Makefile
+
+# other files
+`find $SRC/* | grep -v Dockerfile | grep -v Makefile | grep -v "/\." | sed -e "s/^\(.*\)$/cp\ \1\ $OS\/\./g"`

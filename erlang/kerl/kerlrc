@@ -1,0 +1,1 @@
+KERL_CONFIGURE_OPTIONS="--enable-smp-support --enable-threads --enable-m64-build --enable-vm-probes --enable-kernel-poll --enable-hipe --without-javac --enable-dirty-schedulers --enable-native-libs --disable-sctp" 

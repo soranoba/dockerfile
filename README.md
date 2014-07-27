@@ -35,11 +35,7 @@ erlang + hipe + emacs + erlang-mode + [git](#git) + rebar
 
 <a name="git">
 ### git
-git + git_completion
-
-- Ubuntu 12.10
-
-Copy to guest OS from host OS's git and ssh settings. 
+[git](git)
 
 ## Licence
 MIT Licence

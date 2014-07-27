@@ -1,4 +1,4 @@
-OS = ubuntu\:12.04 ubuntu\:12.10 ubuntu\:13.04 ubuntu\:13.10 ubuntu\:14.04
+OS = ubuntu\:12.04 ubuntu\:14.04
 Ubuntu-dir = .ubuntu-template
 
 .PHONY: all clean

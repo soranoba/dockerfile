@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cp -rf ~/.ssh .ssh
+cp ~/.gitconfig .gitconfig

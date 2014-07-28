@@ -17,4 +17,8 @@ echo "IMAGE_NAME = soranoba/$NAME" > $OS/Makefile
 cat $SRC/Makefile >> $OS/Makefile
 
 # other files
-`find $SRC/* | grep -v Dockerfile | grep -v Makefile | grep -v "/\." | sed -e "s/^\(.*\)$/cp\ \1\ $OS\/\./g"`
+FIND=`find $SRC/* | grep -v Dockerfile | grep -v Makefile | grep -v "/\."`
+for LINE in $FIND
+do
+  cp $LINE $OS/.
+done

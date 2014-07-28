@@ -1,4 +1,4 @@
-IMAGE_NAME = soranoba/erlang:17.01
+IMAGE_NAME = soranoba/erlang:16.b03
 
 .PHONY: build start clean clean_all
 
@@ -7,12 +7,11 @@ all: build start
 build: .build
 
 .build: Dockerfile
-	@cp ~/.gitconfig .
-	@cp -r ~/.ssh .
+	@./.compile
+	@./setup
 	@docker build -t $(IMAGE_NAME) .
 	@if [ $$? = 0 ]; then touch .build; fi
-	@rm -rf .ssh
-	@rm .gitconfig
+	@./teardown
 
 start:
 	@if [ -f .docker ]; then \

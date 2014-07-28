@@ -7,11 +7,10 @@ all: build start
 build: .build
 
 .build: Dockerfile
-	@cp -rf ~/.ssh .ssh
-	@cp ~/.gitconfig .gitconfig
+	@./setup
 	@docker build -t $(IMAGE_NAME) .
 	@if [ $$? = 0 ]; then touch .build; fi
-	@rm -rf .gitconfig .ssh
+	@./teardown
 
 start:
 	@if [ -f .docker ]; then \

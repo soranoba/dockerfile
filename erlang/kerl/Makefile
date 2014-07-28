@@ -1,4 +1,4 @@
-IMAGE_NAME = soranoba/erlang
+IMAGE_NAME = soranoba/erlang:16.b03
 
 .PHONY: build start clean clean_all
 
@@ -7,8 +7,11 @@ all: build start
 build: .build
 
 .build: Dockerfile
+	@./.compile
+	@./setup
 	@docker build -t $(IMAGE_NAME) .
 	@if [ $$? = 0 ]; then touch .build; fi
+	@./teardown
 
 start:
 	@if [ -f .docker ]; then \

@@ -33,9 +33,8 @@ erlang + hipe + emacs + erlang-mode + [git](#git) + rebar
 - erlang R16.03b
  - Ubuntu 12.10
 
-<a name="git">
-### git
-[git](git)
+
+- [git](git)
 
 ## Licence
 MIT Licence

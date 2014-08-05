@@ -31,7 +31,6 @@ RUN apt-get install -y git make
 RUN git clone https://github.com/rebar/rebar.git /usr/local/bin/rebar
 RUN cd /usr/local/bin/rebar; ./bootstrap; cd;
 RUN ln -s /usr/local/bin/rebar/rebar /usr/bin/rebar
-MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
 
 # default update
 RUN apt-get update

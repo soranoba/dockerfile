@@ -25,7 +25,6 @@ RUN apt-get install -y erlang-mode
 RUN git clone https://github.com/rebar/rebar.git /usr/local/bin/rebar
 RUN . `kerl list installations | head -1 | sed -e "s/.*\ \([^ ]*\)$/\1/g"`/activate; cd /usr/local/bin/rebar; ./bootstrap; cd;
 RUN ln -s /usr/local/bin/rebar/rebar /usr/bin/rebar
-MAINTAINER Hinagiku Soranoba <soranoba@gmail.com>
 
 # default update
 RUN apt-get update

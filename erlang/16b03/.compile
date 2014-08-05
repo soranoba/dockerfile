@@ -13,7 +13,7 @@ do
     case $LINE in
         *Makefile) ;;
         *Dockerfile)
-            cat $LINE | tail -n +2 >> Dockerfile;;
+            cat $LINE | tail -n +3 >> Dockerfile;;
         * )
             cp $LINE .
     esac

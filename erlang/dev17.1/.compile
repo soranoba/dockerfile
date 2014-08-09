@@ -1,0 +1,27 @@
+#!/bin/sh
+
+OS=`cat .Dockerfile | head -1 | sed -e "s/FROM\ *\(.*\)/\1/g"`
+IMPORT_DIR=../../git/${OS}/*
+
+# compile
+cat .Dockerfile > Dockerfile
+
+# copy
+FIND=`find ${IMPORT_DIR}`
+for LINE in $FIND
+do
+    case $LINE in
+        *Makefile) ;;
+        *Dockerfile)
+            cat $LINE | tail -n +3 >> Dockerfile;;
+        * )
+            cp $LINE .
+    esac
+done
+
+if [ -f .setup ]; then
+    cat .setup >> setup
+fi
+if [ -f .teardown ]; then
+    cat .teardown >> teardown
+fi

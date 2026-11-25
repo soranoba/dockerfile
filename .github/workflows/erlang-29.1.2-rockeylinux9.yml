@@ -12,6 +12,8 @@ env:
 
 jobs:
   build:
+    permissions:
+      packages: write
     strategy:
       matrix:
         include:
@@ -56,6 +58,8 @@ jobs:
   manifest:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - uses: actions/download-artifact@v4
         with:

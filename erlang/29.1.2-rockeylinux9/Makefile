@@ -1,2 +1,4 @@
+IMAGE = ghcr.io/soranoba/erlang:29.1.2-rockeylinux9
+
 build:
-	docker build -t soranoba/erlang:29.1.2-rockeylinux9 .
+	docker buildx build --platform linux/amd64,linux/arm64 -t $(IMAGE) --push .

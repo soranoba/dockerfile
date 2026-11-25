@@ -1,0 +1,102 @@
+name: Build and push image
+
+on:
+  workflow_dispatch:
+    inputs:
+      directory:
+        description: 'Directory containing Dockerfile (e.g. erlang/29.1.2-rockeylinux9)'
+        required: true
+        type: string
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.resolve.outputs.image }}
+      repo: ${{ steps.resolve.outputs.repo }}
+    steps:
+      - name: Resolve image name
+        id: resolve
+        run: |
+          dir="${{ inputs.directory }}"
+          dir="${dir%/}"
+          IFS='/' read -ra parts <<< "$dir"
+          if [ "${#parts[@]}" -ge 2 ]; then
+            image="ghcr.io/soranoba/${parts[0]}:${parts[1]}"
+          else
+            image="ghcr.io/soranoba/${parts[0]}:latest"
+          fi
+          repo="${image%%:*}"
+          echo "image=$image" >> "$GITHUB_OUTPUT"
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "Image: $image"
+
+  build:
+    needs: prepare
+    permissions:
+      packages: write
+    strategy:
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-latest
+            suffix: amd64
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+            suffix: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push by digest
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ inputs.directory }}
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,name=${{ needs.prepare.outputs.repo }},push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        run: |
+          mkdir -p /tmp/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "/tmp/digests/${digest#sha256:}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: digest-${{ matrix.suffix }}
+          path: /tmp/digests/*
+          retention-days: 1
+
+  manifest:
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: /tmp/digests
+          pattern: digest-*
+          merge-multiple: true
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push manifest
+        run: |
+          docker buildx imagetools create -t "${{ needs.prepare.outputs.image }}" \
+            $(printf '${{ needs.prepare.outputs.repo }}@sha256:%s ' $(ls /tmp/digests))

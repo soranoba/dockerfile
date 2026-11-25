@@ -39,7 +39,7 @@ jobs:
         with:
           context: erlang/29.1.2-rockeylinux9
           platforms: ${{ matrix.platform }}
-          outputs: type=image,name=${{ env.IMAGE }},push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,name=ghcr.io/soranoba/erlang,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         run: |
